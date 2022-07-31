@@ -19,7 +19,7 @@ Usually, it is the name of the git host you want to access eg: private.gitlab.co
 or github.com/my-private.
 This will basically add a new line in your $HOME/.netrc file. 
 
-You can avoid the interactive terminal by using the --user (-u) and --password (-p) flags.
+You can avoid the interactive terminal by using the --login (-u) and --password (-p) flags.
 Note that it's highly recommended to generate a personal access token on your git host
 instead of using your password.
 
@@ -30,19 +30,19 @@ If a similar entry already exists in your .netrc file, it will be overwritten.`,
 func init() {
 	tokenCmd.AddCommand(tokenAddCmd)
 
-	tokenAddCmd.Flags().StringP("user", "u", "", "Directly set the user")
+	tokenAddCmd.Flags().StringP("login", "u", "", "Directly set the login user")
 	tokenAddCmd.Flags().StringP("password", "p", "", "Directly set the password")
 }
 
 func runTokenAdd(cmd *cobra.Command, args []string) {
-	user := cmd.Flag("user").Value.String()
+	login := cmd.Flag("login").Value.String()
 	password := cmd.Flag("password").Value.String()
 
-	if user == "" {
-		prompt := promptui.Prompt{Label: "> User", Validate: terminal.NotEmpty("User")}
+	if login == "" {
+		prompt := promptui.Prompt{Label: "> Login", Validate: terminal.NotEmpty("Login")}
 		result, err := prompt.Run()
 		cobra.CheckErr(err)
-		user = result
+		login = result
 	}
 
 	if password == "" {
@@ -52,7 +52,7 @@ func runTokenAdd(cmd *cobra.Command, args []string) {
 		password = result
 	}
 
-	netrc.Current.AddMachine(args[0], user, password)
+	netrc.Current.AddMachine(args[0], login, password)
 	cobra.CheckErr(netrc.Current.Save())
 
 	logger.Print("New entry added to your .netrc file")
