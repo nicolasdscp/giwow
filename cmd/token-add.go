@@ -11,7 +11,7 @@ import (
 // lsCmd represents the ls command
 var tokenAddCmd = &cobra.Command{
 	Use:   "add [machine]",
-	Short: "Add a new entry to your .netrc file",
+	Short: "Add a new machine to your .netrc file",
 	Args:  cobra.ExactArgs(1),
 	Long: `[machine] is the name of the machine to add to your .netrc file.
 
@@ -21,7 +21,9 @@ This will basically add a new line in your $HOME/.netrc file.
 
 You can avoid the interactive terminal by using the --user (-u) and --password (-p) flags.
 Note that it's highly recommended to generate a personal access token on your git host
-instead of using your password.`,
+instead of using your password.
+
+If a similar entry already exists in your .netrc file, it will be overwritten.`,
 	Run: runTokenAdd,
 }
 

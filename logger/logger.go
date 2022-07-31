@@ -1,6 +1,9 @@
 package logger
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+)
 
 var (
 	VerboseMode bool
@@ -16,6 +19,11 @@ func Init() {
 		Verbose = empty
 		Debug = empty
 	}
+}
+
+var Fatal = func(format string, a ...any) {
+	fmt.Printf("> "+format+"\n", a...)
+	os.Exit(1)
 }
 
 var Print = func(format string, a ...any) {
