@@ -12,7 +12,7 @@ import (
 )
 
 type Workspace struct {
-	Name string `json:"name"`
+	Root string `json:"root"`
 }
 
 var (
@@ -21,12 +21,12 @@ var (
 )
 
 // Init initializes a new workspace and saves it to the filesystem
-func Init(name string) error {
+func Init(root string) error {
 	if CurrentWorkspaceDir == config.CurrentWd {
 		return errors.ErrWorkspaceAlreadyExists()
 	}
 	logger.Debug("Initializing workspace")
-	Current = &Workspace{Name: name}
+	Current = &Workspace{Root: root}
 	CurrentWorkspaceDir = config.CurrentWd
 
 	if err := Save(); err != nil {

@@ -13,8 +13,8 @@ Usage:
   giwow [command]
 
 Available Commands:
-  completion  Generate the autocompletion script for the specified shell
   help        Help about any command
+  prune       Delete all configuration files and all workspaces
   token       Manage your platform tokens. This will interact with your $HOME/.netrc file
   workspace   Manage workspaces
 

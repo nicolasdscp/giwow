@@ -20,6 +20,7 @@ func init() {
 	tokenCmd.AddCommand(tokenLsCmd)
 
 	tokenLsCmd.Flags().BoolP("magnify", "m", false, "Print tokens in a magnified array format")
+	tokenLsCmd.Flags().Bool("showPass", false, "Display your tokens passwords")
 }
 
 func runTokenLs(cmd *cobra.Command, _ []string) {
@@ -35,12 +36,19 @@ func runTokenLs(cmd *cobra.Command, _ []string) {
 
 	t.AppendHeader(table.Row{"#", "Machine", "Login", "Password"})
 	machines := netrc.Current.GetMachines()
+	var pass string
 	for i, m := range machines {
+		pass = "********"
+
+		if cmd.Flag("showPass").Value.String() == "true" {
+			pass = m.Get("password")
+		}
+
 		if m.IsDefault {
-			t.AppendRow(table.Row{"D", m.Name, m.Get("login"), m.Get("password")})
+			t.AppendRow(table.Row{"D", m.Name, m.Get("login"), pass})
 			break
 		}
-		t.AppendRow(table.Row{i + 1, m.Name, m.Get("login"), m.Get("password")})
+		t.AppendRow(table.Row{i + 1, m.Name, m.Get("login"), pass})
 	}
 	t.Render()
 }

@@ -7,11 +7,12 @@ import (
 
 // initCmd represents the init command
 var workspaceInitCmd = &cobra.Command{
-	Use:   "init [name]",
+	Use:   "init [root]",
 	Short: "Initialize a new workspace",
 	Args:  cobra.ExactArgs(1),
 	Long: `This command allows you to initialize a new workspace in the current directory.
-[name] is the name of the workspace, it can be anything you want.
+[root] defines a git remote url of your group. It can be a github url or a gitlab url.
+eg: github.com/my-group
 
 You can also create a workspaces in child directories of the current workspace directory.
 When you initialize a workspace, it will create a .giwow directory in the current path.
