@@ -77,6 +77,14 @@ func ResolveCurrent() error {
 	return loadWorkspace(lastFoundW)
 }
 
+func DeleteWorkspace(path string) error {
+	if err := os.RemoveAll(path); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func loadWorkspace(wPath string) error {
 	data, err := os.ReadFile(path.Join(wPath, ".giwow", "workspace.json"))
 	if err != nil {

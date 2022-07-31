@@ -27,19 +27,19 @@ Flags:
 
 ## 🚀 Getting started
 
-Start by cloning this repository:
+### 📦 Installation
+
+```shell
+$ go install github.com/nicolasdscp/giwow
+```
+or 
 
 ```shell
 $ git clone https://github.com/nicolasdscp/giwow.git
-```
-
-Then install giwow
-
-```shell
 $ make install
 ```
 
-## 🖥 Setting up your workspace
+### 🖥 Setting up your workspace
 
 Choose a folder where your project's workspace will be stored. 
 Then init a new workspace.
@@ -48,7 +48,7 @@ Then init a new workspace.
 $ giwow workspace init my-workspace
 ```
 
-### Working with private repositories
+### 🕵🏼‍ Working with private repositories
 
 In order to work with private repositories, you need to configure `~/.netrc`.
 You can let giwow manage your credentials for you, or you can configure it manually.
@@ -67,3 +67,11 @@ machine <repo-url> login my-user password my-token
 ```
 
 You can list all your tokens with the `giwow token ls` command.
+
+## 🛟 Useful commands
+
+If you want to know more about a command, you can use the `giwow [command] -h` command.
+
+```shell
+$ giwow prune # Remove all configuration file from all workspaces including $HOME/.giwow
+```

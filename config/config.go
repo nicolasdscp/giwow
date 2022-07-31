@@ -16,9 +16,11 @@ const (
 )
 
 var (
-	CfgPath   string
-	CurrentWd string
-	HomeDir   string
+	CfgFilePath          string
+	CfgDir               string
+	CurrentWd            string
+	HomeDir              string
+	SaveConfigFileOnExit = true
 )
 
 func Init() {
@@ -31,7 +33,8 @@ func Init() {
 	CurrentWd, err = os.Getwd()
 	cobra.CheckErr(err)
 
-	CfgPath = path.Join(HomeDir, ".giwow", configFileName+"."+configType)
+	CfgDir = path.Join(HomeDir, ".giwow")
+	CfgFilePath = path.Join(CfgDir, configFileName+"."+configType)
 
 	viper.AddConfigPath(path.Join(HomeDir, ".giwow"))
 	viper.SetConfigType(configType)
@@ -52,16 +55,20 @@ func Init() {
 }
 
 func Write() error {
-	setValues()
-	return viper.WriteConfig()
+	if SaveConfigFileOnExit {
+		setValues()
+		return viper.WriteConfig()
+	}
+
+	return nil
 }
 
 func CreateConfigFile() error {
-	return os.WriteFile(CfgPath, []byte("{}"), 0644)
+	return os.WriteFile(CfgFilePath, []byte("{}"), 0644)
 }
 
 func FileExists() bool {
-	_, err := os.Stat(CfgPath)
+	_, err := os.Stat(CfgFilePath)
 	return err == nil
 }
 
