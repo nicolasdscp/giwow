@@ -104,11 +104,11 @@ func (n *Netrc) AddMachine(name, login, password string) {
 	machine.Name = name
 	if machine.Name == "default" {
 		machine.IsDefault = true
-		machine.tokens = []string{"default", " ", "user", " ", login, " ", "password", " ", password, "\n"}
+		machine.tokens = []string{"default", " ", "login", " ", login, " ", "password", " ", password, "\n"}
 		return
 	}
 
-	machine.tokens = []string{"machine", " ", name, " ", "user", " ", login, " ", "password", " ", password, "\n"}
+	machine.tokens = []string{"machine", " ", name, " ", "login", " ", login, " ", "password", " ", password, "\n"}
 }
 
 // RemoveMachine remove a machine

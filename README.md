@@ -51,7 +51,7 @@ $ giwow workspace init my-workspace
 ### Working with private repositories
 
 In order to work with private repositories, you need to configure `~/.netrc`.
-You can let giwow manage your credentials for you or you can configure it manually.
+You can let giwow manage your credentials for you, or you can configure it manually.
 If you don't want to configure it manually, you can use the `giwow token add` command.
 
 ```shell
@@ -63,7 +63,7 @@ $ giwow token add <repo-url> -u my-user -p my-token
 This will basically add a new entry to `~/.netrc` with the following content:
 
 ```shell
-machine <repo-url> user my-user password my-token
+machine <repo-url> login my-user password my-token
 ```
 
 You can list all your tokens with the `giwow token ls` command.

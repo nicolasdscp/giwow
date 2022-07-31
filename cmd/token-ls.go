@@ -33,15 +33,14 @@ func runTokenLs(cmd *cobra.Command, _ []string) {
 		t.Style().Options.SeparateHeader = true
 	}
 
-	t.AppendHeader(table.Row{"#", "Machine", "User", "Password"})
+	t.AppendHeader(table.Row{"#", "Machine", "Login", "Password"})
 	machines := netrc.Current.GetMachines()
 	for i, m := range machines {
 		if m.IsDefault {
-			t.AppendSeparator()
-			t.AppendRow(table.Row{"", m.Name, m.Get("user"), m.Get("password")})
+			t.AppendRow(table.Row{"D", m.Name, m.Get("login"), m.Get("password")})
 			break
 		}
-		t.AppendRow(table.Row{i + 1, m.Name, m.Get("user"), m.Get("password")})
+		t.AppendRow(table.Row{i + 1, m.Name, m.Get("login"), m.Get("password")})
 	}
 	t.Render()
 }

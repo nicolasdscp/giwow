@@ -18,16 +18,16 @@ var tokenSetCmd = &cobra.Command{
 func init() {
 	tokenCmd.AddCommand(tokenSetCmd)
 
-	tokenSetCmd.Flags().StringP("user", "u", "", "Set the user")
+	tokenSetCmd.Flags().StringP("login", "u", "", "Set the login user")
 	tokenSetCmd.Flags().StringP("password", "p", "", "Set the password")
 }
 
 func runTokenSet(cmd *cobra.Command, args []string) {
-	user := cmd.Flag("user").Value.String()
+	login := cmd.Flag("login").Value.String()
 	password := cmd.Flag("password").Value.String()
 	machine := netrc.Current.Machine(args[0])
 
-	if user == "" && password == "" {
+	if login == "" && password == "" {
 		logger.Fatal("No value to set")
 	}
 
@@ -35,8 +35,8 @@ func runTokenSet(cmd *cobra.Command, args []string) {
 		logger.Fatal("Machine not found")
 	}
 
-	if user != "" {
-		machine.Set("user", user)
+	if login != "" {
+		machine.Set("login", login)
 	}
 
 	if password != "" {
