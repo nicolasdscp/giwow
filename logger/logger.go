@@ -18,16 +18,16 @@ func Init() {
 	}
 }
 
-var Print = func(msg string) {
-	fmt.Printf("> %s\n", msg)
+var Print = func(format string, a ...any) {
+	fmt.Printf("> "+format+"\n", a...)
 }
 
-var Verbose = func(msg string) {
-	fmt.Printf("[v] %s\n", msg)
+var Verbose = func(format string, a ...any) {
+	fmt.Printf("[v] "+format+"\n", a...)
 }
 
-var Debug = func(msg string) {
-	fmt.Printf("[d] %s\n", msg)
+var Debug = func(format string, a ...any) {
+	fmt.Printf("[d] "+format+"\n", a...)
 }
 
-var empty = func(_ string) {}
+var empty = func(_ string, _ ...any) {}

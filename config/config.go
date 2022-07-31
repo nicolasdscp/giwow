@@ -15,26 +15,31 @@ const (
 	configFileName = "config"
 )
 
-var CfgPath string
-var CurrentWd string
+var (
+	CfgPath   string
+	CurrentWd string
+	HomeDir   string
+)
 
 func Init() {
 	// Find home directory.
 	home, err := os.UserHomeDir()
 	cobra.CheckErr(err)
 
+	HomeDir = home
+
 	CurrentWd, err = os.Getwd()
 	cobra.CheckErr(err)
 
-	CfgPath = path.Join(home, ".giwow", configFileName+"."+configType)
+	CfgPath = path.Join(HomeDir, ".giwow", configFileName+"."+configType)
 
-	viper.AddConfigPath(path.Join(home, ".giwow"))
+	viper.AddConfigPath(path.Join(HomeDir, ".giwow"))
 	viper.SetConfigType(configType)
 	viper.SetConfigName(configFileName)
 
 	if !FileExists() {
 		initBaseConfig()
-		cobra.CheckErr(os.MkdirAll(path.Join(home, ".giwow"), 0755))
+		cobra.CheckErr(os.MkdirAll(path.Join(HomeDir, ".giwow"), 0755))
 		cobra.CheckErr(CreateConfigFile())
 		cobra.CheckErr(viper.WriteConfig())
 	}

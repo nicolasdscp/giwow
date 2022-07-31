@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"github.com/nicolasdscp/giwow/insternal/workspace"
+	"github.com/nicolasdscp/giwow/internal/workspace"
 	"github.com/spf13/cobra"
 )
 
@@ -10,15 +10,16 @@ var workspaceCmd = &cobra.Command{
 	Use:               "workspace",
 	Short:             "Manage workspaces",
 	Long:              ``,
-	PersistentPreRunE: preRunWorkspace,
+	PersistentPreRunE: persistentPreRunEWorkspace,
 	Run:               runWorkspace,
 }
 
 func init() {
 	rootCmd.AddCommand(workspaceCmd)
+	workspaceCmd.DisableFlagsInUseLine = true
 }
 
-func preRunWorkspace(cmd *cobra.Command, args []string) error {
+func persistentPreRunEWorkspace(cmd *cobra.Command, args []string) error {
 	return workspace.ResolveCurrent()
 }
 
