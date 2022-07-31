@@ -18,11 +18,11 @@ func init() {
 	rootCmd.AddCommand(tokenCmd)
 	tokenCmd.DisableFlagsInUseLine = true
 
-	tokenCmd.PersistentFlags().String("path", "", `The path to the netrc file, default is $HOME/.netrc`)
+	tokenCmd.PersistentFlags().String("netrc", "", `The path to the netrc file, default is $HOME/.netrc`)
 }
 
 func persistentPreRunEToken(cmd *cobra.Command, _ []string) error {
-	return netrc.ResolveCurrent(cmd)
+	return netrc.ResolveCurrent(cmd.Flag("netrc").Value.String())
 }
 
 func runToken(cmd *cobra.Command, args []string) {

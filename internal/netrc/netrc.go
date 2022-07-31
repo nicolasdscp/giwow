@@ -19,7 +19,6 @@ import (
 
 	"github.com/nicolasdscp/giwow/config"
 	"github.com/nicolasdscp/giwow/logger"
-	"github.com/spf13/cobra"
 )
 
 var (
@@ -45,9 +44,7 @@ func New(p string) *Netrc {
 	return &Netrc{machines: make([]*Machine, 0, 20), Path: p}
 }
 
-func ResolveCurrent(cmd *cobra.Command) (netrcErr error) {
-	netrcPath := cmd.Flag("path").Value.String()
-
+func ResolveCurrent(netrcPath string) (netrcErr error) {
 	if netrcPath == "" {
 		netrcPath = path.Join(config.HomeDir, ".netrc")
 	}

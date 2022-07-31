@@ -11,8 +11,15 @@ import (
 	"github.com/nicolasdscp/giwow/logger"
 )
 
+const (
+	TypeDefault = "default"
+	TypeGitlab  = "gitlab"
+)
+
 type Workspace struct {
-	Root string `json:"root"`
+	Root     string   `json:"root"`
+	Type     string   `json:"type"`
+	Projects []string `json:"projects"`
 }
 
 var (
@@ -83,6 +90,36 @@ func DeleteWorkspace(path string) error {
 	}
 
 	return nil
+}
+
+// AddProject adds a project to the workspace.
+func AddProject(project string) error {
+	if ProjectExists(project) {
+		return errors.ErrProjectAlreadyExists()
+	}
+	Current.Projects = append(Current.Projects, project)
+	return nil
+}
+
+// ProjectExists checks if a project exists in the workspace.
+func ProjectExists(project string) bool {
+	for _, p := range Current.Projects {
+		if p == project {
+			return true
+		}
+	}
+	return false
+}
+
+// ValidateType checks if the workspace type is valid.
+func ValidateType(wType string) (ret bool) {
+	switch wType {
+	case TypeDefault:
+		ret = true
+	case TypeGitlab:
+		ret = true
+	}
+	return ret
 }
 
 func loadWorkspace(wPath string) error {

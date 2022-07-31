@@ -11,3 +11,8 @@ func ErrWorkspaceAlreadyExists() error {
 func ErrWorkspaceNotFound() error {
 	return fmt.Errorf("workspace not found")
 }
+
+// ErrProjectAlreadyExists is triggered when a project is already initialized.
+func ErrProjectAlreadyExists() error {
+	return fmt.Errorf("project already exists in this workspace")
+}

@@ -48,6 +48,26 @@ Then init a new workspace.
 $ giwow workspace init my-workspace
 ```
 
+#### 🦊 Gitlab connection
+
+Giwow will use your `.netrc` file to connect to your Gitlab account.
+First you need to authenticate with your Gitlab account. 
+It's highly recommended to use a personal access token instead of your password.
+Then configure giwow to use your Gitlab account.
+Note that if tou already have a personal access token in your `.netrc`, you can skip this step.
+
+```shell
+$ giwow token add gitlab.com -u gitlab-username -p access-token
+```
+> Note that you can replace `gitlab.com` with your Gitlab domain.
+
+> To generate a personal access token see [Gitlab personal access tokens](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html)
+
+Now set the type of your workspace to `gitlab`.
+
+```shell
+$ giwow workspace set --type gitlab
+```
 ### 🕵🏼‍ Working with private repositories
 
 In order to work with private repositories, you need to configure `~/.netrc`.
@@ -73,5 +93,7 @@ You can list all your tokens with the `giwow token ls` command.
 If you want to know more about a command, you can use the `giwow [command] -h` command.
 
 ```shell
+$ giwow workspace info # Show workspace info
+$ giwow projects prune # Delete all projects present in the workspace file (Not projects by themself)
 $ giwow prune # Remove all configuration file from all workspaces including $HOME/.giwow
 ```

@@ -11,8 +11,8 @@ import (
 // lsCmd represents the ls command
 var tokenAddCmd = &cobra.Command{
 	Use:   "add [machine]",
-	Short: "Add a new machine to your .netrc file",
 	Args:  cobra.ExactArgs(1),
+	Short: "Add a new machine to your .netrc file",
 	Long: `[machine] is the name of the machine to add to your .netrc file.
 
 Usually, it is the name of the git host you want to access eg: private.gitlab.com 
