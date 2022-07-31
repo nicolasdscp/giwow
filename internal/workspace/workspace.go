@@ -23,8 +23,10 @@ type Workspace struct {
 }
 
 var (
-	Current             *Workspace
-	CurrentWorkspaceDir string
+	Current              *Workspace
+	CurrentWorkspaceDir  string
+	CurrentWorkspaceHost string
+	CurrentWorkspaceSlug string // This variable is useful for gitlab workspaces
 )
 
 // Init initializes a new workspace and saves it to the filesystem
@@ -134,6 +136,10 @@ func loadWorkspace(wPath string) error {
 	}
 
 	Current = w
+	split := strings.Split(Current.Root, "/")
+
+	CurrentWorkspaceHost = split[0]
+	CurrentWorkspaceSlug = strings.Join(split[1:], "/")
 
 	return nil
 }

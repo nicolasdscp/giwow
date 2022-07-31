@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"os"
 	"path"
-	"strings"
 
 	"github.com/go-git/go-git/v5"
 	"github.com/go-git/go-git/v5/plumbing/transport/http"
@@ -13,10 +12,15 @@ import (
 )
 
 // CloneProject clones a project from a remote url.
-func CloneProject(name string) (repo *git.Repository, err error) {
+func CloneProject(name string) (*git.Repository, error) {
 	logger.Print("⬇️ Cloning into %s ...", name)
 
-	user, pass := getCredentials()
+	err := os.MkdirAll(path.Join(CurrentWorkspaceDir, name), 0755)
+	if err != nil {
+		return nil, err
+	}
+
+	user, pass := netrc.GetWorkspaceCredentials(Current.Root)
 	return git.PlainClone(path.Join(CurrentWorkspaceDir, name), false, &git.CloneOptions{
 		URL:      getProjectUrl(name),
 		Progress: os.Stdout,
@@ -25,18 +29,6 @@ func CloneProject(name string) (repo *git.Repository, err error) {
 			Password: pass,
 		},
 	})
-}
-
-func getCredentials() (string, string) {
-	lastFoundMachine := &netrc.Machine{Name: ""}
-
-	for _, machine := range netrc.Current.GetMachines() {
-		if strings.Contains(Current.Root, machine.Name) && len(lastFoundMachine.Name) < len(machine.Name) {
-			lastFoundMachine = machine
-		}
-	}
-
-	return lastFoundMachine.Get("login"), lastFoundMachine.Get("password")
 }
 
 // getProjectUrl returns the url of the current project.

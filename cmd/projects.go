@@ -22,6 +22,7 @@ func init() {
 	projectsCmd.PersistentFlags().String("netrc", "", `The path to the netrc file, default is $HOME/.netrc`)
 }
 
+// Load workspace and netrc modules
 func persistentPreRunProjects(cmd *cobra.Command, _ []string) {
 	cobra.CheckErr(workspace.ResolveCurrent())
 	cobra.CheckErr(netrc.ResolveCurrent(cmd.Flag("netrc").Value.String()))

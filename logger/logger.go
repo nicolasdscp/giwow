@@ -31,11 +31,11 @@ var Print = func(format string, a ...any) {
 }
 
 var Verbose = func(format string, a ...any) {
-	fmt.Printf("[v] "+format+"\n", a...)
+	fmt.Printf("> [v] "+format+"\n", a...)
 }
 
 var Debug = func(format string, a ...any) {
-	fmt.Printf("[d] "+format+"\n", a...)
+	fmt.Printf("> [d] "+format+"\n", a...)
 }
 
 var empty = func(_ string, _ ...any) {}
