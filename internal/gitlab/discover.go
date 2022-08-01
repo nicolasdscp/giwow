@@ -6,10 +6,6 @@ import (
 	"github.com/xanzy/go-gitlab"
 )
 
-var (
-	boolPtr = true
-)
-
 func DiscoverProjects(groupSlug string, token string, host string) ([]string, error) {
 	slugSplitLen := len(strings.Split(groupSlug, "/"))
 	client, err := GetClient(token, host)
@@ -20,11 +16,13 @@ func DiscoverProjects(groupSlug string, token string, host string) ([]string, er
 	currentPage := 1
 	projects := make([]*gitlab.Project, 0)
 
+	// We iterate over all pages to get all projects
 	for currentPage > 0 {
 		resProjects, res, reqErr := client.Groups.ListGroupProjects(groupSlug, &gitlab.ListGroupProjectsOptions{
-			IncludeSubGroups: &boolPtr,
+			IncludeSubGroups: gitlab.Bool(true),
 			OrderBy:          gitlab.String("path"),
 			Sort:             gitlab.String("asc"),
+			Archived:         gitlab.Bool(false), // TODO: support archived projects with a flag (--archived)
 			ListOptions: gitlab.ListOptions{
 				Page: currentPage,
 			},
@@ -34,13 +32,19 @@ func DiscoverProjects(groupSlug string, token string, host string) ([]string, er
 		}
 
 		projects = append(projects, resProjects...)
+		// res.NextPage is 0 if there is no next page
 		currentPage = res.NextPage
 	}
 
 	var projectNames []string
 	for _, project := range projects {
 		projectPathSpt := strings.Split(project.PathWithNamespace, "/")
-		projectNames = append(projectNames, strings.Join(projectPathSpt[slugSplitLen:], "/"))
+		toAppend := strings.Join(projectPathSpt[slugSplitLen:], "/")
+		// We want to avoid "" projects
+		if toAppend == "" {
+			continue
+		}
+		projectNames = append(projectNames, toAppend)
 	}
 
 	return projectNames, nil
