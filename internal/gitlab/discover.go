@@ -11,6 +11,7 @@ var (
 )
 
 func DiscoverProjects(groupSlug string, token string, host string) ([]string, error) {
+	slugSplitLen := len(strings.Split(groupSlug, "/"))
 	client, err := GetClient(token, host)
 	if err != nil {
 		return nil, err
@@ -26,7 +27,7 @@ func DiscoverProjects(groupSlug string, token string, host string) ([]string, er
 	var projectNames []string
 	for _, project := range projects {
 		projectPathSpt := strings.Split(project.PathWithNamespace, "/")
-		projectNames = append(projectNames, strings.Join(projectPathSpt[1:], "/"))
+		projectNames = append(projectNames, strings.Join(projectPathSpt[slugSplitLen:], "/"))
 	}
 
 	return projectNames, nil
