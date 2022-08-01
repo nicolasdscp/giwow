@@ -1,6 +1,7 @@
 package gitlab
 
 import (
+	"sort"
 	"strings"
 
 	"github.com/xanzy/go-gitlab"
@@ -20,8 +21,6 @@ func DiscoverProjects(groupSlug string, token string, host string) ([]string, er
 	for currentPage > 0 {
 		resProjects, res, reqErr := client.Groups.ListGroupProjects(groupSlug, &gitlab.ListGroupProjectsOptions{
 			IncludeSubGroups: gitlab.Bool(true),
-			OrderBy:          gitlab.String("path"),
-			Sort:             gitlab.String("asc"),
 			Archived:         gitlab.Bool(false), // TODO: support archived projects with a flag (--archived)
 			ListOptions: gitlab.ListOptions{
 				Page: currentPage,
@@ -46,6 +45,8 @@ func DiscoverProjects(groupSlug string, token string, host string) ([]string, er
 		}
 		projectNames = append(projectNames, toAppend)
 	}
+
+	sort.Strings(projectNames)
 
 	return projectNames, nil
 }
