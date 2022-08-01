@@ -36,7 +36,7 @@ func runWorkspaceInfo(_ *cobra.Command, _ []string) {
 
 	if logger.VerboseMode {
 		_, token := netrc.GetWorkspaceCredentials(workspace.Current.Root)
-		namespacePath, err := gitlab.GetNamespaceFullPath(token, workspace.CurrentWorkspaceHost)
+		namespacePath, err := gitlab.GetNamespaceFullPath(workspace.CurrentWorkspaceSlug, token, workspace.CurrentWorkspaceHost)
 		if err != nil {
 			logger.Fatal("💀 Error getting namespace full path: %s", err.Error())
 		}
