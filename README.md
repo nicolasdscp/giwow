@@ -38,11 +38,6 @@ Flags:
       --verbose   Enable verbose messages
 ```
 
-## Summary
-
-- [Getting started](#🚀-getting-started)
-  - [Installation](#📦-installation)
-
 ## 🚀 Getting started
 
 ### 📦 Installation
