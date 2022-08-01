@@ -17,11 +17,24 @@ func DiscoverProjects(groupSlug string, token string, host string) ([]string, er
 		return nil, err
 	}
 
-	projects, _, err := client.Groups.ListGroupProjects(groupSlug, &gitlab.ListGroupProjectsOptions{
-		IncludeSubGroups: &boolPtr,
-	})
-	if err != nil {
-		return nil, err
+	currentPage := 1
+	projects := make([]*gitlab.Project, 0)
+
+	for currentPage > 0 {
+		resProjects, res, reqErr := client.Groups.ListGroupProjects(groupSlug, &gitlab.ListGroupProjectsOptions{
+			IncludeSubGroups: &boolPtr,
+			OrderBy:          gitlab.String("path"),
+			Sort:             gitlab.String("asc"),
+			ListOptions: gitlab.ListOptions{
+				Page: currentPage,
+			},
+		})
+		if reqErr != nil {
+			return nil, reqErr
+		}
+
+		projects = append(projects, resProjects...)
+		currentPage = res.NextPage
 	}
 
 	var projectNames []string
