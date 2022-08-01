@@ -31,7 +31,7 @@ Flags:
 ### 📦 Installation
 
 ```shell
-$ go install github.com/nicolasdscp/giwow
+$ go install github.com/nicolasdscp/giwow@latest
 ```
 or 
 
@@ -46,8 +46,36 @@ Choose a folder where your project's workspace will be stored.
 Then init a new workspace.
 
 ```shell
-$ giwow workspace init my-workspace
+$ giwow workspace init <workspace-url>
 ```
+
+The workspace url must be a valid host URL. Look at the examples below.
+
+```
+private.gitlab.com/
+└── org/
+    └── groupA/
+        └── subGroupA/
+            ├── subsubGroupA/
+            │   ├── project1
+            │   └── ...
+            ├── project1
+            └── ...
+```
+
+If you want to manage all project in subsubGroupA, you can use the following command:
+
+```shell
+$ giwow workspace init private.gitlab.com/org/groupA/subGroupA/subsubGroupA
+```
+
+If you think bigger and you want to manage all project in subGroupA including projects in subgroup, you can use the following command:
+
+```shell
+$ giwow workspace init private.gitlab.com/org/groupA/subGroupA
+```
+
+> This format is required if you manage to connect to Gitlab or Github to clone your repositories.
 
 ### 🕵🏼‍ Working with private repositories
 
@@ -116,6 +144,8 @@ $ giwow projects discover
 
 > Note that `discover` will also add projects in sub groups. 
 > Giwow will automatically clone these projects in the good hierarchy.
+
+> Giwow will ignore archived projects.
 
 ### Cloning your projects
 
