@@ -11,7 +11,7 @@ var tokenCmd = &cobra.Command{
 	Short:             "Manage your platform tokens. This will interact with your $HOME/.netrc file",
 	Long:              ``,
 	PersistentPreRunE: persistentPreRunEToken,
-	Run:               runToken,
+	RunE:              runTokenE,
 }
 
 func init() {
@@ -25,6 +25,6 @@ func persistentPreRunEToken(cmd *cobra.Command, _ []string) error {
 	return netrc.ResolveCurrent(cmd.Flag("netrc").Value.String())
 }
 
-func runToken(cmd *cobra.Command, args []string) {
-	cmd.Usage()
+func runTokenE(cmd *cobra.Command, args []string) error {
+	return cmd.Usage()
 }

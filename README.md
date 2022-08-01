@@ -1,5 +1,7 @@
 # 🔱 Giwow [WIP]
 
+![golangci-lint](https://github.com/nicolasdscp/giwow/actions/workflows/golangci-lint.yml/badge.svg)
+
 Giwow is a simple `git` workspace manager. 
 It allows you to manage all projects in a Gitlab group for example.
 Clone, pull and push your projects in a single command. 

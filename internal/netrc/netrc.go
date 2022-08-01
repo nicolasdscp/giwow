@@ -143,8 +143,12 @@ func (n *Netrc) Save() error {
 		if err != nil {
 			return err
 		}
-		stdin.Write(body)
-		stdin.Close()
+		if _, err = stdin.Write(body); err != nil {
+			return err
+		}
+		if err = stdin.Close(); err != nil {
+			return err
+		}
 		cmd.Stderr = os.Stderr
 		body, err = cmd.Output()
 		if err != nil {
@@ -177,7 +181,7 @@ func read(path string) (io.Reader, error) {
 }
 
 func lex(file io.Reader) []string {
-	commentRe := regexp.MustCompile("(^#|\\s+#)")
+	commentRe := regexp.MustCompile(`(^#|\s+#)`)
 	scanner := bufio.NewScanner(file)
 	scanner.Split(func(data []byte, eof bool) (int, []byte, error) {
 		var loc []int

@@ -11,8 +11,7 @@ import (
 )
 
 var (
-	logLevel string
-	rootCmd  = &cobra.Command{
+	rootCmd = &cobra.Command{
 		Use:   "giwow",
 		Short: "Git workspace manager",
 		Long:  ``,

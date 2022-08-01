@@ -11,7 +11,7 @@ var workspaceCmd = &cobra.Command{
 	Short:            "Manage workspaces",
 	Long:             ``,
 	PersistentPreRun: persistentPreRunEWorkspace,
-	Run:              runWorkspace,
+	RunE:             runWorkspaceE,
 }
 
 func init() {
@@ -23,6 +23,6 @@ func persistentPreRunEWorkspace(cmd *cobra.Command, args []string) {
 	cobra.CheckErr(workspace.ResolveCurrent())
 }
 
-func runWorkspace(cmd *cobra.Command, args []string) {
-	cmd.Usage()
+func runWorkspaceE(cmd *cobra.Command, args []string) error {
+	return cmd.Usage()
 }

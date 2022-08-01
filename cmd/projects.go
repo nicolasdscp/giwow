@@ -13,7 +13,7 @@ var projectsCmd = &cobra.Command{
 	Short:            "Manage projects in the current workspace",
 	Long:             ``,
 	PersistentPreRun: persistentPreRunProjects,
-	Run:              runProjects,
+	RunE:             runProjectsE,
 }
 
 func init() {
@@ -32,6 +32,6 @@ func persistentPreRunProjects(cmd *cobra.Command, _ []string) {
 	}
 }
 
-func runProjects(cmd *cobra.Command, args []string) {
-	cmd.Usage()
+func runProjectsE(cmd *cobra.Command, args []string) error {
+	return cmd.Usage()
 }
