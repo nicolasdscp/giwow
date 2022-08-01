@@ -40,10 +40,10 @@ Flags:
 
 ## Summary
 
-- [Getting started](#getting-started)
+- [Getting started](#🚀-getting-started)
+  - [Installation](#📦-installation)
 
 ## 🚀 Getting started
-#getting-started
 
 ### 📦 Installation
 
