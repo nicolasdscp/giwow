@@ -4,9 +4,9 @@ title: 🔱 Giwow
 description: Manage your git projects with one command
 ---
 
-[Giwow](./../index.html) > [Workspace](./index.html)
+[Giwow](/) > [Workspace](/workspace)
 
-# `giwow workspace`
+# giwow workspace
 
 ```
 Usage:

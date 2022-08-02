@@ -54,7 +54,7 @@ $ git clone https://github.com/nicolasdscp/giwow.git
 $ make install
 ```
 
-## 🖥 Setting up your workspace
+### 🖥 Setting up your workspace
 
 Choose a folder where your project's workspace will be stored. 
 Then init a new workspace.
