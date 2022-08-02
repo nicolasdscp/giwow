@@ -4,7 +4,7 @@ title: 🔱 Giwow
 description: Manage your git projects with one command
 ---
 
-[Giwow](./../index.html) > [Getting started](./getting-started.html)
+[Giwow](/) > [Getting started](/getting-started.html)
 
 ## 🚀 Getting started
 

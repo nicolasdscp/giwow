@@ -19,6 +19,16 @@ It allows you to manage all projects in a Gitlab group for example.
 Clone, pull and push your projects in a single command.
 You can connect `giwow` with Jira to sync your backlogs and issue.
 
+## 🗺 Website map
+
+- [Giwow](/)
+    - [Getting Started](/getting-started.html)
+    - [Workspace](/workspace)
+    - [Token](/token)
+    - [Projects](/projects)
+
+## ⚙️ Usage
+
 ```
 $ giwow
 Git workspace manager
@@ -44,11 +54,5 @@ Flags:
 
 If you want information about a command, you can directly access to its documentation by reaching `giwow.run/command/subcommand`.
 
-## 🗺 Website map
 
-- [Giwow](/index.html)
-  - [Getting Started](/getting-started.html)
-  - [Workspace](/workspace/index.html)
-  - [Token](/token/index.html)
-  - [Projects](/project/index.html)
 
