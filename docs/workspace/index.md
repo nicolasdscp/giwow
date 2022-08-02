@@ -1,3 +1,9 @@
+---
+layout: default
+title: 🔱 Giwow
+description: Manage your git projects with one command
+---
+
 # 🖥 Workspace
 
 ```
