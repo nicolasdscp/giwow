@@ -2,15 +2,17 @@
  <h1  align="center">🔱 Giwow</h1>
  <h4 align="center">Manage your git projects with one command</h4>
   <p align="center">
-    <a href="https://github.com/nicolasdscp/giwow/actions">
-      <img alt="Lint passing" src="https://github.com/nicolasdscp/giwow/actions/workflows/golangci-lint.yml/badge.svg" />
-    </a>
     <a href="https://go.dev/blog/go1.18">
       <img alt="Go version" src="https://img.shields.io/badge/go-1.18-blue" />
     </a>
+    <a href="https://github.com/nicolasdscp/giwow/actions">
+      <img alt="Lint passing" src="https://github.com/nicolasdscp/giwow/actions/workflows/golangci-lint.yml/badge.svg" />
+    </a>
+    <a href="https://giwow.run">
+      <img alt="Documentation" src="https://img.shields.io/badge/documentation-giwow.run-blue" />
+    </a>
   </p>
 </p>
-
 
 Giwow is a simple `git` workspace manager. 
 It allows you to manage all projects in a Gitlab group for example.
