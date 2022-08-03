@@ -40,6 +40,16 @@ Flags:
       --verbose   Enable verbose messages
 ```
 
+## 🔑 Key features
+
+- [Create workspace](https://giwow.run/workspace)
+- [Manage your tokens in `.netrc` file](https://giwow.run/token)
+- [Discover your projects from your Gitlab account](https://giwow.run/projects)
+- [Clone all your projects in a single command](https://giwow.run/projects)
+- [Open multiple projects with your favorite editor in one command](https://giwow.run/projects)
+
+> For more information, please visit [Giwow website](https://giwow.run)
+
 ## 🚀 Getting started
 
 ### 📦 Installation
