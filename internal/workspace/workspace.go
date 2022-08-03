@@ -16,10 +16,17 @@ const (
 	TypeGitlab  = "gitlab"
 )
 
+var DefaultOpenOptions = map[string]string{
+	"code":   "code",
+	"goland": "goland",
+	"finder": "open",
+}
+
 type Workspace struct {
-	Root     string   `json:"root"`
-	Type     string   `json:"type"`
-	Projects []string `json:"projects"`
+	Root        string   `json:"root"`
+	Type        string   `json:"type"`
+	DefaultOpen string   `json:"defaultOpen"`
+	Projects    []string `json:"projects"`
 }
 
 var (
@@ -122,6 +129,12 @@ func ValidateType(wType string) (ret bool) {
 		ret = true
 	}
 	return ret
+}
+
+// ValidateDefaultOpen checks if the default open option is valid.
+func ValidateDefaultOpen(openOption string) bool {
+	_, exist := DefaultOpenOptions[openOption]
+	return exist
 }
 
 func loadWorkspace(wPath string) error {

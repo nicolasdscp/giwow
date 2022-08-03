@@ -19,7 +19,7 @@ func init() {
 	workspaceCmd.DisableFlagsInUseLine = true
 }
 
-func persistentPreRunEWorkspace(cmd *cobra.Command, args []string) {
+func persistentPreRunEWorkspace(_ *cobra.Command, _ []string) {
 	cobra.CheckErr(workspace.ResolveCurrent())
 }
 
