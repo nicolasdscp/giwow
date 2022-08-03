@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"github.com/nicolasdscp/giwow/errors"
+	"github.com/nicolasdscp/giwow/internal/exception"
 	"github.com/nicolasdscp/giwow/internal/netrc"
 	"github.com/nicolasdscp/giwow/internal/workspace"
 	"github.com/nicolasdscp/giwow/logger"
@@ -28,7 +28,7 @@ func persistentPreRunProjects(cmd *cobra.Command, _ []string) {
 	cobra.CheckErr(netrc.ResolveCurrent(cmd.Flag("netrc").Value.String()))
 
 	if workspace.Current == nil {
-		logger.Fatal(errors.ErrWorkspaceNotFound().Error())
+		logger.Fatal(exception.ErrWorkspaceNotFound().Error())
 	}
 }
 
