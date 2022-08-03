@@ -30,8 +30,6 @@ Flags:
 $ giwow token ls
 ```
 
-Complete list of available flags [here](giwow.run/token/ls).
-
 ## Adding a new machine to your .netrc file
 
 Usually, you will want to add a new machine to your .netrc file manually. Giwow can do it for you.
