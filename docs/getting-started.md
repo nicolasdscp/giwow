@@ -104,6 +104,9 @@ $ giwow workspace set --type gitlab
 
 Now you can manage your projects with the `giwow projects` command.
 
+> To manage your projects, you need to be in your workspace but not especially at the root.
+
+
 ### Adding your projects
 
 ```shell
