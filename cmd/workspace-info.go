@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"github.com/nicolasdscp/giwow/errors"
+	"github.com/nicolasdscp/giwow/internal/exception"
 	"github.com/nicolasdscp/giwow/internal/workspace"
 	"github.com/nicolasdscp/giwow/logger"
 	"github.com/spf13/cobra"
@@ -23,7 +23,7 @@ func init() {
 
 func runWorkspaceInfo(_ *cobra.Command, _ []string) {
 	if workspace.Current == nil {
-		logger.Fatal(errors.ErrWorkspaceNotFound().Error())
+		logger.Fatal(exception.ErrWorkspaceNotFound().Error())
 	}
 	logger.Print("🔎 Information for workspace %s", workspace.CurrentWorkspaceDir)
 	logger.Print("root: " + workspace.Current.Root)

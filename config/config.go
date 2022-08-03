@@ -5,7 +5,7 @@ import (
 	"os"
 	"path"
 
-	"github.com/nicolasdscp/giwow/errors"
+	"github.com/nicolasdscp/giwow/internal/exception"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -48,7 +48,7 @@ func Init() {
 	}
 
 	if err = viper.ReadInConfig(); err != nil {
-		fmt.Println(errors.NoConfigFile())
+		fmt.Println(exception.NoConfigFile())
 	}
 
 	loadValues()

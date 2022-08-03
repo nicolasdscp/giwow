@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"github.com/nicolasdscp/giwow/config"
-	"github.com/nicolasdscp/giwow/errors"
+	"github.com/nicolasdscp/giwow/internal/exception"
 	"github.com/nicolasdscp/giwow/logger"
 )
 
@@ -32,7 +32,7 @@ var (
 // Init initializes a new workspace and saves it to the filesystem
 func Init(root string) error {
 	if CurrentWorkspaceDir == config.CurrentWd {
-		return errors.ErrWorkspaceAlreadyExists()
+		return exception.ErrWorkspaceAlreadyExists()
 	}
 	logger.Debug("Initializing workspace")
 	Current = &Workspace{Root: root}
@@ -97,7 +97,7 @@ func DeleteWorkspace(path string) error {
 // AddProject adds a project to the workspace.
 func AddProject(project string) error {
 	if ProjectExists(project) {
-		return errors.ErrProjectAlreadyExists()
+		return exception.ErrProjectAlreadyExists()
 	}
 	Current.Projects = append(Current.Projects, project)
 	return nil
