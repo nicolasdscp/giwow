@@ -8,6 +8,8 @@ description: Manage your git projects with one command
 
 # giwow token set [machine]
 
+## Usage
+
 ```
 Set values for a machine
 

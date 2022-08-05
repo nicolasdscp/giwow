@@ -8,6 +8,8 @@ description: Manage your git projects with one command
 
 # giwow token rm [machine]
 
+## Usage
+
 ```
 Remove a machine from your .netrc file
 

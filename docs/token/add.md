@@ -1,4 +1,4 @@
-ls.md---
+---
 layout: default
 title: 🔱 Giwow
 description: Manage your git projects with one command
@@ -7,6 +7,8 @@ description: Manage your git projects with one command
 [Giwow](/) > [Token](/token) > [add](/token/add.html)
 
 # giwow token add [machine]
+
+## Usage
 
 ```
 [machine] is the name of the machine to add to your .netrc file.

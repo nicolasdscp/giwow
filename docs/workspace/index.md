@@ -8,6 +8,8 @@ description: Manage your git projects with one command
 
 # giwow workspace
 
+## Usage
+
 ```
 Usage:
   giwow workspace

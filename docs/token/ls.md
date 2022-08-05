@@ -8,6 +8,8 @@ description: Manage your git projects with one command
 
 # giwow token ls
 
+## Usage
+
 ```
 This will basically list your tokens in your $HOME/.netrc file.
 
