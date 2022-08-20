@@ -2,6 +2,9 @@ package cmd
 
 import (
 	"github.com/nicolasdscp/giwow/internal/netrc"
+
+	"os"
+
 	"github.com/spf13/cobra"
 )
 
@@ -22,7 +25,12 @@ func init() {
 }
 
 func persistentPreRunEToken(cmd *cobra.Command, _ []string) error {
-	return netrc.ResolveCurrent(cmd.Flag("netrc").Value.String())
+	err := netrc.ResolveCurrent(cmd.Flag("netrc").Value.String())
+	if os.IsNotExist(err) {
+		os.Exit(1)
+	}
+
+	return err
 }
 
 func runTokenE(cmd *cobra.Command, args []string) error {
