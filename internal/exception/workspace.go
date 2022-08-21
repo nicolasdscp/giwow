@@ -16,3 +16,8 @@ func ErrWorkspaceNotFound() error {
 func ErrProjectAlreadyExists() error {
 	return fmt.Errorf("project already exists in this workspace")
 }
+
+// ErrNetrcFileNotExist is triggered when the netrc file does not exist.
+func ErrNetrcFileNotExist(err error) error {
+	return fmt.Errorf("netrc file does not exist: %w", err)
+}

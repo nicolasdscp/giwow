@@ -53,7 +53,6 @@ func ResolveCurrent(netrcPath string) (netrcErr error) {
 
 	stat, err := os.Stat(netrcPath)
 	if err != nil || stat.IsDir() {
-		logger.Print("Could not find netrc file at %s", netrcPath)
 		return err
 	}
 
