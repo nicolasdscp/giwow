@@ -1,7 +1,9 @@
 package cmd
 
 import (
+	"github.com/nicolasdscp/giwow/internal/exception"
 	"github.com/nicolasdscp/giwow/internal/netrc"
+	"github.com/nicolasdscp/giwow/logger"
 
 	"os"
 
@@ -27,7 +29,7 @@ func init() {
 func persistentPreRunEToken(cmd *cobra.Command, _ []string) error {
 	err := netrc.ResolveCurrent(cmd.Flag("netrc").Value.String())
 	if os.IsNotExist(err) {
-		os.Exit(1)
+		logger.Fatal(exception.ErrNetrcFileNotExist(err).Error())
 	}
 
 	return err
