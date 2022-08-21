@@ -4,41 +4,52 @@ import (
 	"fmt"
 
 	"github.com/AlecAivazis/survey/v2"
+	"github.com/nicolasdscp/giwow/internal/exception"
 	"github.com/nicolasdscp/giwow/internal/workspace"
 	"github.com/nicolasdscp/giwow/logger"
 	"github.com/spf13/cobra"
 )
 
 var (
-	projectsOpenForce string
-	projectsOpenCmd   = &cobra.Command{
-		Use:   "open [project1] [project2] ...",
-		Args:  cobra.MinimumNArgs(1),
-		Short: "Open a project with the defined editor",
-		Long:  ``,
-		Run:   runProjectOpen,
+	openForce string
+	openCmd   = &cobra.Command{
+		Use:              "open [project1] [project2] ...",
+		Args:             cobra.MinimumNArgs(1),
+		Short:            "Open a project with the defined editor",
+		Long:             ``,
+		PersistentPreRun: persistentPreRunOpen,
+		Run:              runOpen,
 	}
 )
 
 func init() {
-	projectsCmd.AddCommand(projectsOpenCmd)
+	rootCmd.AddCommand(openCmd)
 
-	projectsOpenCmd.Flags().StringVarP(&projectsOpenForce, "force", "f", "", "Force the editor to be used")
+	openCmd.Flags().StringVarP(&openForce, "force", "f", "", "Force the editor to be used")
 }
 
-func runProjectOpen(_ *cobra.Command, args []string) {
-	if workspace.Current.DefaultOpen == "" && projectsOpenForce == "" {
+// Load workspace and netrc modules
+func persistentPreRunOpen(cmd *cobra.Command, _ []string) {
+	cobra.CheckErr(workspace.ResolveCurrent())
+
+	if workspace.Current == nil {
+		logger.Fatal(exception.ErrWorkspaceNotFound().Error())
+	}
+}
+
+func runOpen(_ *cobra.Command, args []string) {
+	if workspace.Current.DefaultOpen == "" && openForce == "" {
 		logger.Print("❌ No default editor set")
 		return
 	}
 
-	if projectsOpenForce != "" && !workspace.ValidateDefaultOpen(projectsOpenForce) {
-		logger.Print("❌ Invalid open method %s", projectsOpenForce)
+	if openForce != "" && !workspace.ValidateDefaultOpen(openForce) {
+		logger.Print("❌ Invalid open method %s", openForce)
 		return
 	}
 
-	if projectsOpenForce == "" {
-		projectsOpenForce = workspace.Current.DefaultOpen
+	if openForce == "" {
+		openForce = workspace.Current.DefaultOpen
 	}
 
 	// First we prepare the list of projects to open
@@ -68,7 +79,7 @@ func runProjectOpen(_ *cobra.Command, args []string) {
 
 	// Then we open the projects
 	for _, project := range projectsToOpen {
-		if err := workspace.OpenProject(project, projectsOpenForce); err != nil {
+		if err := workspace.OpenProject(project, openForce); err != nil {
 			logger.Print("❌ Project %s not opened: %s", project, err.Error())
 			continue
 		}
