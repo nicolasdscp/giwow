@@ -55,12 +55,13 @@ Flags:
 ### 📦 Installation
 
 ```shell
-$ go install github.com/nicolasdscp/giwow@latest
+$ go install github.com/nicolasdscp/giwow@v0.6.0
 ```
 or 
 
 ```shell
 $ git clone https://github.com/nicolasdscp/giwow.git
+$ git checkout v0.6.0
 $ make install
 ```
 
